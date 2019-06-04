@@ -63,6 +63,8 @@ public class Product implements Transformable {
                 .withPrice(this.price)
                 .withStatus(this.status)
                 .withType(this.type)
+                .withLostAmount(this.lostAmount)
+                .withRequest(this.request.transform())
                 .build();
     }
 

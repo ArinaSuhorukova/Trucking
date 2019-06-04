@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "waybill")
@@ -56,6 +57,8 @@ public class WayBill implements Transformable {
     @Override
     public WayBillDto transform() {
         return WayBillDto.builder()
+                .withId(this.id)
+                .withCheckpoints(this.checkpoints.stream().map(Checkpoint::transform).collect(Collectors.toList()))
                 .withDateFrom(this.dateFrom)
                 .withDateTo(this.dateTo)
                 .withStatus(this.status)

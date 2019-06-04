@@ -3,8 +3,6 @@ package by.itechart.Server.dto;
 import by.itechart.Server.entity.Invoice;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class InvoiceDto {
 
@@ -18,87 +16,20 @@ public class InvoiceDto {
 
     private LocalDate dateOfCheck;
 
-    private String driverFullName;
+    private UserDto dispatcherFrom;
 
-    private String carName;
+    private UserDto dispatcherTo;
 
-    private String dispatcherFromFullName;
+    private UserDto manager;
 
-    private String dispatcherToFullName;
+    private RequestDto request;
 
-    private String managerFullName;
 
-    private List<ProductDto> products = new ArrayList<>();
-
-    private InvoiceDto(){}
+    private InvoiceDto() {
+    }
 
     public static Builder builder() {
         return new InvoiceDto().new Builder();
-    }
-
-    public class Builder {
-        private Builder() {
-        }
-
-        public Builder withId(final int id){
-            InvoiceDto.this.id = id;
-            return this;
-        }
-
-        public Builder withStatus(final Invoice.Status status) {
-            InvoiceDto.this.status = status;
-            return this;
-        }
-
-        public Builder withNumber(final String number) {
-            InvoiceDto.this.number = number;
-            return this;
-        }
-
-        public Builder withDateOfIssue(final LocalDate dateOfIssue) {
-            InvoiceDto.this.dateOfIssue = dateOfIssue;
-            return this;
-        }
-
-        public Builder withDateOfCheck(final LocalDate dateOfCheck) {
-            InvoiceDto.this.dateOfCheck = dateOfCheck;
-            return this;
-        }
-
-        public Builder withCarName(final String carName){
-            InvoiceDto.this.carName = carName;
-            return  this;
-        }
-
-        public Builder withDriverFullName(String driverFullName){
-            InvoiceDto.this.driverFullName = driverFullName;
-            return this;
-        }
-
-        public Builder withDispathcerFromFullName(final String dispatcherFromFullName){
-            InvoiceDto.this.dispatcherFromFullName = dispatcherFromFullName;
-            return  this;
-        }
-
-        public Builder withDispatcherToFullName(final String dispatcherToFullName){
-            InvoiceDto.this.dispatcherToFullName = dispatcherToFullName;
-            return  this;
-        }
-
-        public Builder withManagerFullName(final String managerFullName){
-            InvoiceDto.this.managerFullName = managerFullName;
-            return  this;
-        }
-
-        public Builder withProducts(final List<ProductDto> products){
-            InvoiceDto.this.products = products;
-            return  this;
-        }
-
-
-        public InvoiceDto build() {
-            return InvoiceDto.this;
-        }
     }
 
     public Invoice.Status getStatus() {
@@ -141,31 +72,90 @@ public class InvoiceDto {
         this.id = id;
     }
 
-    public String getCarName() { return carName; }
-
-    public void setCarName(String carName) { this.carName = carName; }
-
-    public List<ProductDto> getProducts() {
-        return products;
+    public UserDto getDispatcherFrom() {
+        return dispatcherFrom;
     }
 
-    public void setProducts(final List<ProductDto> products) {
-        this.products = products;
+    public void setDispatcherFrom(final UserDto dispatcherFrom) {
+        this.dispatcherFrom = dispatcherFrom;
     }
 
-    public String getDriverFullName() { return driverFullName; }
+    public UserDto getDispatcherTo() {
+        return dispatcherTo;
+    }
 
-    public void setDriverFullName(final String driverFullName) { this.driverFullName = driverFullName; }
+    public void setDispatcherTo(final UserDto dispatcherTo) {
+        this.dispatcherTo = dispatcherTo;
+    }
 
-    public String getDispatcherFromFullName() { return dispatcherFromFullName; }
+    public UserDto getManager() {
+        return manager;
+    }
 
-    public void setDispatcherFromFullName(final String dispatcherFromFullName) { this.dispatcherFromFullName = dispatcherFromFullName; }
+    public void setManager(final UserDto manager) {
+        this.manager = manager;
+    }
 
-    public String getDispatcherToFullName() { return dispatcherToFullName; }
+    public RequestDto getRequest() {
+        return request;
+    }
 
-    public void setDispatcherToFullName(final String dispatcherToFullName) { this.dispatcherToFullName = dispatcherToFullName; }
+    public void setRequest(final RequestDto request) {
+        this.request = request;
+    }
 
-    public String getManagerFullName() { return managerFullName; }
+    public class Builder {
+        private Builder() {
+        }
 
-    public void setManagerFullName(final String managerFullName) { this.managerFullName = managerFullName; }
+        public Builder withId(final int id) {
+            InvoiceDto.this.id = id;
+            return this;
+        }
+
+        public Builder withStatus(final Invoice.Status status) {
+            InvoiceDto.this.status = status;
+            return this;
+        }
+
+        public Builder withNumber(final String number) {
+            InvoiceDto.this.number = number;
+            return this;
+        }
+
+        public Builder withDateOfIssue(final LocalDate dateOfIssue) {
+            InvoiceDto.this.dateOfIssue = dateOfIssue;
+            return this;
+        }
+
+        public Builder withDateOfCheck(final LocalDate dateOfCheck) {
+            InvoiceDto.this.dateOfCheck = dateOfCheck;
+            return this;
+        }
+
+        public Builder withDispatcherFrom(final UserDto dispatcherFrom) {
+            InvoiceDto.this.dispatcherFrom = dispatcherFrom;
+            return this;
+        }
+
+        public Builder withDispatcherTo(final UserDto dispatcherTo) {
+            InvoiceDto.this.dispatcherTo = dispatcherTo;
+            return this;
+        }
+
+        public Builder withManager(final UserDto manager) {
+            InvoiceDto.this.manager = manager;
+            return this;
+        }
+
+        public Builder withRequest(final RequestDto request) {
+            InvoiceDto.this.request = request;
+            return this;
+        }
+
+        public InvoiceDto build() {
+            return InvoiceDto.this;
+        }
+    }
+
 }

@@ -1,10 +1,13 @@
 package by.itechart.Server.entity;
 
+import by.itechart.Server.dto.RequestDto;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author Gorlach Dmitry
@@ -12,7 +15,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "request")
-public class Request {
+public class Request implements Transformable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -57,6 +60,19 @@ public class Request {
     @NotNull(message = "Status cannot be null")
     @Column(name = "status")
     private Request.Status status;
+
+    @Override
+    public RequestDto transform() {
+        return RequestDto.builder()
+                .withId(this.id)
+                .withCar(this.car.transform())
+                .withClientCompanyFrom(this.clientCompanyFrom.transform())
+                .withClientCompanyTo(this.clientCompanyTo.transform())
+                .withDriver(this.driver.transform())
+                .withStatus(this.status)
+                .withProducts(this.products.stream().map(Product::transform).collect(Collectors.toList()))
+                .build();
+    }
 
     public enum Status {
         NOT_VIEWED,

@@ -36,7 +36,7 @@ class App extends React.Component {
                 <Route path="/client/:id" component={ClientComponent}/>
                 <Route path="/login" component={LoginForm}/>
                 <Route path="/clients" component={ClientListComponent}/>
-                <Route path="/waybills" component={WaybillListComponent}/
+                <Route path="/waybills" component={WaybillListComponent}/>
                 <ProtectedRoute exact path="/users" allowed='SYSADMIN' component={UserListComponent}/>
             </Router>
         );

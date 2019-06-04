@@ -1,11 +1,13 @@
 package by.itechart.Server.entity;
 
+import by.itechart.Server.dto.ConfirmationTokenDto;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "confirmation_token")
-public class ConfirmationToken {
+public class ConfirmationToken implements Transformable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,5 +63,16 @@ public class ConfirmationToken {
 
     public void setUser(final User user) {
         this.user = user;
+    }
+
+
+    @Override
+    public ConfirmationTokenDto transform() {
+        return ConfirmationTokenDto.builder()
+                .withConfirmationToken(this.confirmationToken)
+                .withCreateDate(this.createDate)
+                .withId(this.id)
+                .withUser(this.user.transform())
+                .build();
     }
 }

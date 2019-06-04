@@ -51,10 +51,13 @@ public class Checkpoint implements Transformable {
     @Override
     public CheckpointDto transform() {
         return CheckpointDto.builder()
+                .withId(this.id)
                 .withDate(this.date)
                 .withLatitude(this.latitude)
                 .withLongitude(this.longitude)
                 .withName(this.name)
+                .withStatus(this.status)
+                .withWayBill(this.wayBill.transform())
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package by.itechart.Server.dto;
 
+
 public class AddressDto {
     private int id;
 

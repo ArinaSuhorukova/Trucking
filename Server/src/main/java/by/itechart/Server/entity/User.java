@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "user")
@@ -116,6 +118,7 @@ public class User implements Transformable {
     public UserDto transform() {
         return UserDto.builder()
                 .withId(this.id)
+                .withEnabled(this.isEnabled)
                 .withDateOfBirth(this.dateOfBirth)
                 .withLogin(this.login)
                 .withPassword(this.password)
@@ -127,6 +130,8 @@ public class User implements Transformable {
                 .withRole(this.role.ordinal())
                 .withEmail(this.email)
                 .withAddressDto(this.address.transform())
+                .withClientCompany(this.clientCompany.transform())
+                .withRequests(this.requests.stream().map(Request::transform).collect(Collectors.toList()))
                 .build();
     }
 

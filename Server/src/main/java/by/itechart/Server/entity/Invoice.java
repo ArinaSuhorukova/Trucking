@@ -79,9 +79,10 @@ public class Invoice implements Transformable {
                 .withDateOfIssue(this.dateOfIssue)
                 .withNumber(this.number)
                 .withStatus(this.status)
-                .withDispathcerFromFullName(this.dispatcherFrom.getName() + " " + this.dispatcherFrom.getPatronymic() + " " + this.dispatcherFrom.getSurname())
-                .withDispatcherToFullName(this.dispatcherTo.getName() + " " + this.dispatcherTo.getPatronymic() + " " + this.dispatcherTo.getSurname())
-                .withManagerFullName(this.manager.getName() + " " + this.manager.getPatronymic() + " " + this.manager.getSurname())
+                .withDispatcherFrom(this.dispatcherFrom.transform())
+                .withDispatcherTo(this.dispatcherTo.transform())
+                .withManager(this.manager.transform())
+                .withRequest(this.request.transform())
                 .build();
     }
 

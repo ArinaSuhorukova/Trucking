@@ -15,14 +15,88 @@ public class ProductDto {
 
     private Product.Status status;
 
-    private ProductDto(){}
+    private Integer lostAmount;
+
+    private RequestDto request;
+
+    private ProductDto() {
+    }
 
     public static Builder builder() {
         return new ProductDto().new Builder();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(final String type) {
+        this.type = type;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(final Integer amount) {
+        this.amount = amount;
+    }
+
+    public Integer getLostAmount() {
+        return lostAmount;
+    }
+
+    public void setLostAmount(final Integer lostAmount) {
+        this.lostAmount = lostAmount;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(final Integer price) {
+        this.price = price;
+    }
+
+    public Product.Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(final Product.Status status) {
+        this.status = status;
+    }
+
+    public RequestDto getRequest() {
+        return request;
+    }
+
+    public void setRequest(final RequestDto request) {
+        this.request = request;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
+    }
+
     public class Builder {
         private Builder() {
+        }
+
+        public Builder withRequest(final RequestDto request) {
+            ProductDto.this.request = request;
+            return this;
         }
 
         public Builder withId(final int id) {
@@ -30,6 +104,10 @@ public class ProductDto {
             return this;
         }
 
+        public Builder withLostAmount(final int lostAmount) {
+            ProductDto.this.lostAmount = lostAmount;
+            return this;
+        }
 
 
         public Builder withName(final String name) {
@@ -60,54 +138,6 @@ public class ProductDto {
         public ProductDto build() {
             return ProductDto.this;
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(final String type) {
-        this.type = type;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(final Integer amount) {
-        this.amount = amount;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(final Integer price) {
-        this.price = price;
-    }
-
-    public Product.Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(final Product.Status status) {
-        this.status = status;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(final int id) {
-        this.id = id;
     }
 
 }

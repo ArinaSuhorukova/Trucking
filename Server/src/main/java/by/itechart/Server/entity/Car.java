@@ -1,12 +1,23 @@
 package by.itechart.Server.entity;
 
 import by.itechart.Server.dto.CarDto;
+import by.itechart.Server.dto.RequestDto;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "car")
@@ -37,17 +48,8 @@ public class Car implements Transformable {
     /**
      * One car can be in different requests in various dates.
      */
-    @OneToMany( mappedBy = "car", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Request> requests;
-
-    public enum Status {
-        AVAILABLE,
-        UNAVAILABLE
-    }
-
-    public enum CarType {
-        TILT, FRIDGE, TANKER
-    }
 
     @Override
     public CarDto transform() {
@@ -57,6 +59,7 @@ public class Car implements Transformable {
                 .withConsumption(this.consumption)
                 .withName(this.name)
                 .withStatus(this.status)
+                .withRequests(this.requests.stream().map(Request::transform).collect(Collectors.toList()))
                 .build();
     }
 
@@ -136,5 +139,14 @@ public class Car implements Transformable {
                 ", status=" + status +
                 ", requests=" + requests +
                 '}';
+    }
+
+    public enum Status {
+        AVAILABLE,
+        UNAVAILABLE
+    }
+
+    public enum CarType {
+        TILT, FRIDGE, TANKER
     }
 }
